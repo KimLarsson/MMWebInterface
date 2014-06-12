@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Unity Web Player | El Molino</title>
+		<script type='text/javascript' src='https://ssl-webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/jquery.min.js'></script>
+		<script type="text/javascript">
+		<!--
+		var unityObjectUrl = "http://webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js";
+		if (document.location.protocol == 'https:')
+			unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
+		document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
+		-->
+		</script>
+<script type="text/javascript">
+		<!--
+
+			var config = {
+				width: '100%', 
+				height: '100%',
+				params: { 
+				
+		enableDebugging:"0",
+		disableContextMenu: true,
+		
+        backgroundcolor: "000000",
+
+        bordercolor: "ffffff",
+
+        textcolor: "ffffff",
+
+        logoimage: "MyLogo.png",
+
+        progressbarimage: "loading.png",
+
+        progressframeimage: "loadingframe.png"
+				
+				}
+				
+			};
+			config.params["disableContextMenu"] = true;
+			var u = new UnityObject2(config);
+			
+			jQuery(function() {
+
+				var $missingScreen = jQuery("#unityPlayer").find(".missing");
+				var $brokenScreen = jQuery("#unityPlayer").find(".broken");
+				$missingScreen.hide();
+				$brokenScreen.hide();
+				$missingScreen.find("div.missing_Install").hide();
+				
+				
+				
+				u.observeProgress(function (progress) {
+					switch(progress.pluginStatus) {
+						case "broken":
+							$brokenScreen.find("a").click(function (e) {
+								e.stopPropagation();
+								e.preventDefault();
+								u.installPlugin();
+								return false;
+							});
+							$brokenScreen.show();
+						break;
+						case "missing":
+							$missingScreen.find("div.missing_TextLogo").click(function (e) {
+								e.stopPropagation();
+								e.preventDefault();
+								u.installPlugin();
+								$missingScreen.find("div.missing_TextLogo").fadeOut("fast");
+								$missingScreen.find("div.missing_Install").fadeIn("fast");
+								return false;
+							});
+							$missingScreen.show();
+						break;
+						case "installed":
+							$missingScreen.remove();
+						break;
+						case "first":
+						break;
+					}
+				});
+				u.initPlugin(jQuery("#unityPlayer")[0], "explodeview.unity3d");
+			});
+			
+			$("div.missing_TextLogo").click(function(){
+			  $( "div.missing_TextLogo" ).hide( "fast", function() {
+    alert( "Animation complete." );
+  });
+			});
+			
+		-->
+		</script>
+	<style type="text/css">
+		<!--
+		body {
+   		background-color:#ffffff;
+    		padding:0px;
+    		margin:0px;
+    		width:100%;
+    		height:100%;
+    		overflow:hidden;
+
+		}
+		a:link{
+			
+		}
+		 a:visited {
+			color: #000;
+		}
+		a:active{
+			
+		}
+		a:hover {
+			color: #666;
+		}
+		p.header {
+			font-size: small;
+		}
+		p.header span {
+			font-weight: bold;
+		}
+		p.footer {
+			font-size: x-small;
+		}
+		div.content {
+   			background-color:#000000;
+    		position:absolute;
+    		top:0px;
+    		left:0px;
+    		width:100%;
+    		height:100%;
+    		overflow:auto;
+		}
+		div.broken{
+			
+			
+		}
+		div.missing {
+	background-color: #336666;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+		}
+	div.missing_BC {
+	padding: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: #000;
+	font-weight: bold;
+	background-image: url(./Bilder/installBC.jpg);
+	background-position: center center;
+		}
+	div.missing_Welcome {
+	width: 600px;
+	height: 150px;
+	overflow: hidden;
+	font-weight: lighter;
+	font-family: homizio;
+	font-size: 150px;
+	color: #F90;
+	font-variant: normal;
+	float: left;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	position: relative;
+	margin-left: 0px;
+	padding-top: 0%;
+	text-align: right;
+		}
+		div.missing_3TempLogo {
+	width: 262px;
+	height: 57px;
+	overflow: hidden;
+	font-weight: normal;
+	font-family: homizio;
+	font-size: 50px;
+	color: #FFF;
+	font-variant: normal;
+	float: left;
+	position: relative;
+	background-image: url(./Bilder/mailLogo.png);
+	padding-top: 50px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 25px;
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	margin-right: 1080px;
+		}
+		div.missing_Intro {
+	width: 600px;
+	height: 150px;
+	overflow: auto;
+	font-weight: normal;
+	font-family: homizio;
+	font-size: 55px;
+	color: #6E7A8B;
+	font-variant: normal;
+	float: left;
+	position: relative;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0%;
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	left: 0px;
+	text-align: right;
+	top: 0px;
+		}
+	div.missing_UnityLogo {
+	float: left;
+	height: 93px;
+	width: 250px;
+	margin-top: -15px;
+	margin-left: 50px;
+	background-image: url(./Bilder/unitylogo.png);
+		}
+	div.missing_TextLogo {
+	float: left;
+	height: 350px;
+	width: 900px;
+	margin-top: 20%;
+	margin-left: 50%;
+	overflow: hidden;
+	left: -450px;
+	position: relative;
+	top: -175px;
+		}
+		
+	div.missing_Install {
+	float: left;
+	height: 500px;
+	width: 513px;
+	overflow: visible;
+	position: absolute;
+	left: -256px;
+	margin-top: 10%;
+	margin-left: 50%;
+		}
+	div.missing_Install_text_above {
+	float: left;
+	height: 100px;
+	width: 513px;
+	overflow: visible;
+	position: absolute;
+	font-family: homizio;
+	font-size: 35px;
+	color: #6E7A8B;
+	text-align: center;
+	top: -100px;
+		}
+	div.missing_Install_img {
+	float: left;
+	height: 399px;
+	width: 513px;
+	margin-top: 0%;
+	margin-left: 0%;
+	overflow: visible;
+	left: 0px;
+	position: absolute;
+	top: 50px;
+	background-image: url(./Bilder/instruct1.png);
+		}
+
+			div.missing_Install_text_below {
+	float: left;
+	height: 100px;
+	width: 513px;
+	overflow: visible;
+	left: 0px;
+	position: absolute;
+	top: 450px;
+	font-family: homizio;
+	font-size: 35px;
+	color: #6E7A8B;
+	text-align: center;
+		}
+		
+		div.missing a {
+			height: 63px;
+			position: relative;
+			top: -31px;
+		}
+		div.broken img{
+			
+		}
+		div.missing img {
+			border-width: 0px;
+		}
+		div.broken {
+			display: none;
+		}
+		div#unityPlayer {
+			background-color:#000000;
+    		padding:0px;
+    		margin:0px;
+    		width:100%;
+    		height:100%;
+    		overflow:hidden;
+		}
+		-->
+		</style>
+</head>
+<body>
+
+<div class="content">
+  <div id="unityPlayer">
+			  <div class="missing" >
+				<div class="missing_BC">
+               	  <a href="http://3temp.com" title="3Temp"><div class="missing_3TempLogo"></div></a>
+                     
+                     <div class="missing_Install">
+                 	 <div class="missing_Install_img"></div>
+                     <div class="missing_Install_text_above">
+                     1. Open the downloaded installer. 
+                     </div>
+                     <div class="missing_Install_text_below">
+                     2. Press "I Agree" when prompted.
+                     </div>
+                  <a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">                 
+                  </div>
+                  <div class="missing_TextLogo">
+                      <div class="missing_Welcome">
+                      <b>Welcome</b>
+                    </div>
+                    <div class="missing_Intro"> To view our virtual guide<br />&nbsp;&nbsp;please install this plugin </div>
+                      <div class="missing_UnityLogo"></div>
+                      
+                  </div>
+                </div>
+                  </a>
+    </div>
+			   
+			   
+			   
+  </div>
+</div>
+		
+</body>
+</html>
